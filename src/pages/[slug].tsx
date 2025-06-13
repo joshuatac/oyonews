@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import Head from "next/head";
-import { useRouter } from "next/router";
+// pages/[slug].tsx
 
+import Head from "next/head";
+import { GetServerSideProps } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MainNav from "@/components/MainNav";
@@ -9,9 +9,7 @@ import TrendingPosts from "@/components/TrendingPosts";
 import AdBanner from "@/components/AdBanner";
 import PostContent from "@/components/PostContent";
 import { fetchPostBySlug, fetchRelatedPosts } from "@/lib/api";
-
-import Skeleton from "@/components/SkeletonPost"; // Optional: create this component for post loading
-
+import Skeleton from "@/components/SkeletonPost";
 
 type WPPost = {
   id: number;
@@ -35,48 +33,19 @@ type RelatedPost = {
   image: string;
 };
 
-// --- Component ---
+type Props = {
+  post: WPPost | null;
+  relatedPosts: RelatedPost[];
+};
 
-export default function SinglePostPage() {
-  const router = useRouter();
-  const { slug } = router.query;
+export default function SinglePostPage({ post, relatedPosts }: Props) {
+  if (!post) return <Skeleton />;
 
-  const [post, setPost] = useState<WPPost | null>(null);
-  const [relatedPosts, setRelatedPosts] = useState<RelatedPost[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    if (!slug || typeof slug !== "string") return;
-
-    const loadPost = async () => {
-      setLoading(true);
-      try {
-        const fetchedPost = await fetchPostBySlug(slug);
-
-        if (!fetchedPost) {
-          console.error("Post not found");
-          setLoading(false);
-          return;
-        }
-
-        setPost(fetchedPost);
-
-        const related = await fetchRelatedPosts(fetchedPost);
-        setRelatedPosts(related);
-      } catch (err) {
-        console.error("Error fetching post:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadPost();
-  }, [slug]);
-
-  const title = post?.title?.rendered || "Loading...";
-  const excerpt = post?.excerpt?.rendered?.replace(/<[^>]+>/g, "").slice(0, 140) ?? "";
+  const title = post.title?.rendered || "Post";
+  const excerpt =
+    post.excerpt?.rendered?.replace(/<[^>]+>/g, "").slice(0, 140) ?? "";
   const image =
-    post?._embedded?.["wp:featuredmedia"]?.[0]?.source_url ??
+    post._embedded?.["wp:featuredmedia"]?.[0]?.source_url ??
     "https://oyonews.com.ng/default-og-image.jpg";
 
   return (
@@ -101,13 +70,8 @@ export default function SinglePostPage() {
         <div className="container mx-auto px-4 py-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2">
-              {loading || !post ? (
-                <Skeleton /> // A skeleton component for post loading
-              ) : (
-                <PostContent post={post} relatedPosts={relatedPosts} />
-              )}
+              <PostContent post={post} relatedPosts={relatedPosts} />
             </div>
-
             <div className="lg:col-span-1">
               <TrendingPosts />
               <div className="mt-8">
@@ -122,3 +86,32 @@ export default function SinglePostPage() {
     </>
   );
 }
+
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { slug } = context.params as { slug: string };
+
+  try {
+    const post = await fetchPostBySlug(slug);
+    if (!post) {
+      return { notFound: true };
+    }
+
+    const relatedPosts = await fetchRelatedPosts(post);
+
+    return {
+      props: {
+        post,
+        relatedPosts,
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching post:", error);
+    return {
+      props: {
+        post: null,
+        relatedPosts: [],
+      },
+    };
+  }
+};
