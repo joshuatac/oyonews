@@ -69,7 +69,7 @@ export default function PostContent({ post, relatedPosts }: Props) {
     post._embedded?.["wp:term"]?.[1]?.map((tag: { name: string }) => tag.name) || [];
 
 const date = format(new Date(post.date), "MMMM d, yyyy"); 
-  const postUrl = `https://oyonews.com.ng/posts/${post.slug}`;
+  const postUrl = `https://oyonews.com.ng/${post.slug}`;
   const contentWithAds = injectAdsIntoContent(post.content.rendered);
 
   return (
@@ -170,7 +170,7 @@ const date = format(new Date(post.date), "MMMM d, yyyy");
             relatedPosts.map((rp) => (
               <Link
                 key={rp.id}
-                href={`/posts/${rp.slug}`}
+                href={`/${rp.slug}`}
                 className="flex gap-4 p-4 rounded-lg hover:shadow-md transition-shadow"
               >
                 <Image
