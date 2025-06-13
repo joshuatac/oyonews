@@ -6,11 +6,17 @@ import { AuthProvider } from "@/context/AuthContext";
 import RouteChangeLoader from "@/components/RouteChangeLoader";
 import Layout from "@/components/Layout";
 
+declare global {
+  interface Window {
+    _mgq?: unknown[]; 
+  }
+}
+
 export default function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     if (typeof window !== "undefined") {
-      (window as any)._mgq = (window as any)._mgq || [];
-      (window as any)._mgq.push(["_mgc.load"]);
+      window._mgq = window._mgq || [];
+      window._mgq.push(["_mgc.load"]);
     }
   }, []);
 
