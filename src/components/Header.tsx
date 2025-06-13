@@ -61,7 +61,8 @@ const Header = () => {
 
   return (
     <>
-  
+  <style>{`div[data-widget-id="1800927"] { min-height: 300px; }`}</style>
+      <div data-type="_mgwidget" data-widget-id="1800927"></div>
       <header className="bg-black text-white sticky top-0 z-50">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
