@@ -27,6 +27,7 @@ export default function Banner() {
             fill
             className="object-contain"
             priority
+            unoptimized 
           />
         </a>
       </div>

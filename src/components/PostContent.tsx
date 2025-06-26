@@ -83,6 +83,7 @@ const date = format(new Date(post.date), "MMMM d, yyyy");
           height={400}
           className="w-full h-64 md:h-96 object-cover"
           loading="lazy"
+          unoptimized 
         />
         <div className="absolute top-4 left-4">
           <Badge className="bg-red-600 text-white">{category}</Badge>
@@ -180,6 +181,7 @@ const date = format(new Date(post.date), "MMMM d, yyyy");
                   height={80}
                   className="w-20 h-20 object-cover rounded"
                   loading="lazy"
+                  unoptimized 
                 />
                 <div>
                   <h4 className="font-semibold text-gray-800 line-clamp-2 mb-2">

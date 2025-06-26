@@ -154,6 +154,7 @@ const FeaturedPosts = () => {
                     className={`w-full object-cover transition-transform duration-300 group-hover:scale-110 ${index === 0 ? "h-64 md:h-80" : "h-48"}`}
                     width={800}
                     height={400}
+                    
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                   <Badge className="absolute top-4 left-4 bg-red-500 hover:bg-red-600 text-white">
