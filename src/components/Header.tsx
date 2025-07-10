@@ -12,7 +12,6 @@ import {
   DropdownMenuTrigger,
 } from './ui/dropdown-menu';
 import { Avatar, AvatarFallback } from './ui/avatar';
-import Image from 'next/image';
 import { useAuth } from '@/context/AuthContext';
 
 
