@@ -1,6 +1,6 @@
 // pages/api/hello.ts
 
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+// Next.js API route support: https://nextjs.org/docs/api-routes/introductio
 export const config = {
   runtime: 'edge',
 };
