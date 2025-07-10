@@ -1,7 +1,7 @@
 {
-  "functions": {
-    "api/**/*.ts": {
-      "runtime": "edge"
+  "build": {
+    "env": {
+      "NEXT_PUBLIC_API_URL": "https://api.oyonews.com.ng"
     }
   }
 }
