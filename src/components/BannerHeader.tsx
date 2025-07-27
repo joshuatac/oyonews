@@ -26,7 +26,7 @@ export default function BannerHeader() {
         style={{
           width: "100%",
           height: "auto",
-          maxWidth: "Ba",
+          maxWidth: "1200px",
           display: "block",
           margin: "0 auto"
         }}
