@@ -98,7 +98,7 @@ const Header = () => {
 
             {/* Nav Links */}
             <nav className="hidden md:flex items-center space-x-6">
-              <Link href="/" className="text-white hover:text-red-400">Home</Link>
+              <Link href="/" className="text-white hover:text-red-400">HOME</Link>
               <Link href="/search" className="text-white hover:text-red-400 flex items-center">
                 <Search className="h-4 w-4 mr-1" /> Search
               </Link>
