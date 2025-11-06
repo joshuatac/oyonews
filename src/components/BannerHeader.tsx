@@ -1,4 +1,3 @@
-// components/BannerHeader.tsx
 import { useEffect, useState } from "react";
 
 export default function BannerHeader() {
@@ -20,7 +19,7 @@ export default function BannerHeader() {
 
   return (
     <a href={banner.banner_link} target="_blank" rel="noopener noreferrer">
-     <img
+      <img
         src={banner.banner_image}
         alt="Banner"
         style={{
