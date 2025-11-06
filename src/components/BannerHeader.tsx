@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
 
+interface BannerData {
+  banner_image: string;
+  banner_link: string;
+}
+
 export default function BannerHeader() {
-  const [banner, setBanner] = useState<{ banner_image: string; banner_link: string } | null>(null);
+  const [banner, setBanner] = useState<BannerData | null>(null);
 
   useEffect(() => {
     const fetchBanner = async () => {
@@ -9,13 +14,14 @@ export default function BannerHeader() {
         "https://api.oyonews.com.ng/wp-json/wp/v2/pages?slug=site-settings&acf_format=standard"
       );
       const data = await res.json();
-      setBanner(data[0]?.acf ?? null);
+      const acf = data[0]?.acf as BannerData; 
+      if (acf?.banner_image) setBanner(acf);
     };
 
     fetchBanner();
   }, []);
 
-  if (!banner?.banner_image) return null;
+  if (!banner) return null;
 
   return (
     <a href={banner.banner_link} target="_blank" rel="noopener noreferrer">
@@ -25,9 +31,9 @@ export default function BannerHeader() {
         style={{
           width: "100%",
           height: "auto",
-          maxWidth: "1200px",
           display: "block",
-          margin: "0 auto"
+          margin: "0 auto",
+          maxWidth: "1200px",
         }}
         loading="lazy"
       />
