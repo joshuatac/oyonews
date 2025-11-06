@@ -42,6 +42,9 @@ export async function fetchPostBySlug(slug: string): Promise<WPPost | null> {
 
 }
 
+
+
+
 // Get related posts by category
 export async function fetchRelatedPosts(post: WPPost): Promise<RelatedPost[]> {
   const categoryId = post.categories?.[0];
