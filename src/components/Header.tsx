@@ -14,7 +14,6 @@ import {
 import { Avatar, AvatarFallback } from './ui/avatar';
 import { useAuth } from '@/context/AuthContext';
 
-
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [logoUrl, setLogoUrl] = useState('');
@@ -60,8 +59,23 @@ const Header = () => {
 
   return (
     <>
-  <style>{`div[data-widget-id="1800927"] { min-height: 300px; }`}</style>
-      <div data-type="_mgwidget" data-widget-id="1800927"></div>
+      {/* 🟢 Hardcoded Banner Section */}
+      <div className="w-full bg-white text-center border-b border-gray-200">
+        <a
+          href="https://oyonews.com.ng"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="https://api.oyonews.com.ng/wp-content/uploads/2025/11/WhatsApp-Image-2025-11-06-at-12.53.40_8aaa7433.jpg"
+            alt="Top Advert Banner"
+            className="mx-auto w-full max-w-[1200px] h-auto"
+            loading="lazy"
+          />
+        </a>
+      </div>
+
+      {/* 🔴 Header Section */}
       <header className="bg-black text-white sticky top-0 z-50">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
@@ -80,13 +94,13 @@ const Header = () => {
               <Link href="/" className="flex items-center" onClick={closeMobileMenu}>
                 {logoUrl ? (
                   <img
-                  src={logoUrl}
-                  alt="Oyonews Logo"
-                  width={32}
-                  height={32}
-                  className="mr-2"
-                  loading="lazy"
-                />
+                    src={logoUrl}
+                    alt="Oyonews Logo"
+                    width={32}
+                    height={32}
+                    className="mr-2"
+                    loading="lazy"
+                  />
                 ) : (
                   <div className="bg-red-600 rounded p-2 mr-2">
                     <div className="text-white font-bold text-sm">ON</div>
@@ -182,7 +196,7 @@ const Header = () => {
             </div>
           </div>
 
-          {/* Mobile nav */}
+          {/* Mobile Nav */}
           <div
             className={`md:hidden transition-all duration-300 ease-in-out ${
               isMobileMenuOpen
