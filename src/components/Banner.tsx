@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 export default function Banner() {
@@ -19,8 +20,8 @@ export default function Banner() {
   return (
     <div className="w-full bg-white text-center py-2 border-gray-200">
       <div className="relative w-full h-[80px] sm:h-[100px]">
-        <a href="https://oyonews.ng" target="_blank" rel="noopener noreferrer">
-          <img
+        <a href="https://oyonews.com.ng" target="_blank" rel="noopener noreferrer">
+          <Image
             src={bannerUrl}
             alt="Top Advert Banner"
             className="object-contain w-full h-full"
