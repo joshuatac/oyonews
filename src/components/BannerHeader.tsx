@@ -1,10 +1,21 @@
-"use client";
+import { useEffect, useState } from "react";
 
 export default function BannerHeader() {
-  const banner = {
-    banner_image: "https://api.oyonews.com.ng/wp-content/uploads/2025/11/WhatsApp-Image-2025-11-06-at-12.53.40_8aaa7433.jpg",
-    banner_link: "https://oyonews.com.ng",
-  };
+  const [banner, setBanner] = useState<{ banner_image: string; banner_link: string } | null>(null);
+
+  useEffect(() => {
+    const fetchBanner = async () => {
+      const res = await fetch(
+        "https://api.oyonews.com.ng/wp-json/wp/v2/pages?slug=site-settings&acf_format=standard"
+      );
+      const data = await res.json();
+      setBanner(data[0]?.acf ?? null);
+    };
+
+    fetchBanner();
+  }, []);
+
+  if (!banner?.banner_image) return null;
 
   return (
     <a href={banner.banner_link} target="_blank" rel="noopener noreferrer">
@@ -14,9 +25,9 @@ export default function BannerHeader() {
         style={{
           width: "100%",
           height: "auto",
-          display: "block",
-          margin: "0 auto",
           maxWidth: "1200px",
+          display: "block",
+          margin: "0 auto"
         }}
         loading="lazy"
       />
