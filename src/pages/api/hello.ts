@@ -1,13 +1,15 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import type { NextApiRequest, NextApiResponse } from "next";
+// pages/api/hello.ts
 
-type Data = {
-  name: string;
+// Next.js API route support: https://nextjs.org/docs/api-routes/introductio
+export const config = {
+  runtime: 'edge',
 };
 
-export default function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<Data>,
-) {
-  res.status(200).json({ name: "John Doe" });
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export default async function handler(_: Request) {
+  return new Response(JSON.stringify({ name: "John Doe" }), {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
 }

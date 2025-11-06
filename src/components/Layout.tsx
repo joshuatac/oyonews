@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import HeaderBanner from "./BannerHeader";
+// import HeaderBanner from "./BannerHeader";
 
 type LayoutProps = {
   children: ReactNode;
@@ -8,7 +8,7 @@ type LayoutProps = {
 const Layout = ({ children }: LayoutProps) => {
   return (
     <>
-      <HeaderBanner />
+      {/* <HeaderBanner /> */}
       <main>{children}</main>
     </>
   );
