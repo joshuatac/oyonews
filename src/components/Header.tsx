@@ -60,7 +60,7 @@ const Header = () => {
   return (
     <>
       {/* 🟢 Hardcoded Banner Section */}
-      <div className="w-full bg-white text-center border-b border-gray-200">
+      {/* <div className="w-full bg-white text-center border-b border-gray-200">
         <a
           href="https://oyonews.com.ng"
           target="_blank"
@@ -73,7 +73,7 @@ const Header = () => {
             loading="lazy"
           />
         </a>
-      </div>
+      </div> */}
 
       {/* 🔴 Header Section */}
       <header className="bg-black text-white sticky top-0 z-50">
