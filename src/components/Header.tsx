@@ -82,8 +82,8 @@ const Header = () => {
                   <img
                     src={logoUrl}
                     alt="Oyonews Logo"
-                    width={32}
-                    height={32}
+                    width={33}
+                    height={33}
                     className="mr-2"
                     loading="lazy"
                   />
