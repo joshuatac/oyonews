@@ -59,21 +59,7 @@ const Header = () => {
 
   return (
     <>
-      {/* 🟢 Hardcoded Banner Section */}
-      {/* <div className="w-full bg-white text-center border-b border-gray-200">
-        <a
-          href="https://oyonews.com.ng"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img
-            src="https://api.oyonews.com.ng/wp-content/uploads/2025/11/WhatsApp-Image-2025-11-06-at-12.53.40_8aaa7433.jpg"
-            alt="Top Advert Banner"
-            className="mx-auto w-full max-w-[1200px] h-auto"
-            loading="lazy"
-          />
-        </a>
-      </div> */}
+
 
       {/* 🔴 Header Section */}
       <header className="bg-black text-white sticky top-0 z-50">
