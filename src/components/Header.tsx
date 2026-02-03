@@ -59,7 +59,14 @@ const Header = () => {
 
   return (
     <>
-
+      <div className="w-ful">
+        <img
+          src="https://api.oyonews.com.ng/wp-content/uploads/2026/02/20ef5e07-adc2-4a5c-8942-c5cf925161b9.jpeg"
+          alt="Top Banner"
+          className="w-full h-auto object-cover"
+          loading="lazy"
+        />
+      </div>
 
       {/* 🔴 Header Section */}
       <header className="bg-black text-white sticky top-0 z-50">
@@ -74,10 +81,18 @@ const Header = () => {
                 onClick={toggleMobileMenu}
                 aria-label="Toggle menu"
               >
-                {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+                {isMobileMenuOpen ? (
+                  <X className="h-5 w-5" />
+                ) : (
+                  <Menu className="h-5 w-5" />
+                )}
               </Button>
 
-              <Link href="/" className="flex items-center" onClick={closeMobileMenu}>
+              <Link
+                href="/"
+                className="flex items-center"
+                onClick={closeMobileMenu}
+              >
                 {logoUrl ? (
                   <img
                     src={logoUrl}
@@ -98,14 +113,23 @@ const Header = () => {
 
             {/* Nav Links */}
             <nav className="hidden md:flex items-center space-x-6">
-              <Link href="/" className="text-white hover:text-red-400">Home</Link>
-              <Link href="/search" className="text-white hover:text-red-400 flex items-center">
+              <Link href="/" className="text-white hover:text-red-400">
+                Home
+              </Link>
+              <Link
+                href="/search"
+                className="text-white hover:text-red-400 flex items-center"
+              >
                 <Search className="h-4 w-4 mr-1" /> Search
               </Link>
-              <Link href="/about" className="text-white hover:text-red-400">About</Link>
-              <Link href="/contact" className="text-white hover:text-red-400">Contact</Link>
-              {isAuthenticated && (
-                user?.role === 'administrator' ? (
+              <Link href="/about" className="text-white hover:text-red-400">
+                About
+              </Link>
+              <Link href="/contact" className="text-white hover:text-red-400">
+                Contact
+              </Link>
+              {isAuthenticated &&
+                (user?.role === "administrator" ? (
                   <a
                     href="https://api.oyonews.com.ng/wp-admin"
                     target="_blank"
@@ -115,9 +139,13 @@ const Header = () => {
                     Admin Panel
                   </a>
                 ) : (
-                  <Link href="/dashboard" className="text-white hover:text-red-400">Dashboard</Link>
-                )
-              )}
+                  <Link
+                    href="/dashboard"
+                    className="text-white hover:text-red-400"
+                  >
+                    Dashboard
+                  </Link>
+                ))}
             </nav>
 
             {/* Auth Button / User */}
@@ -127,27 +155,34 @@ const Header = () => {
                   <DropdownMenuTrigger asChild>
                     <Avatar className="cursor-pointer border-2 border-white hover:border-green-400">
                       <AvatarFallback className="bg-red-600 text-white uppercase">
-                        {getInitials(user?.name || user?.email || 'U')}
+                        {getInitials(user?.name || user?.email || "U")}
                       </AvatarFallback>
                     </Avatar>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end" className="bg-white">
-                    <DropdownMenuItem disabled>Hello, {user?.name}</DropdownMenuItem>
+                    <DropdownMenuItem disabled>
+                      Hello, {user?.name}
+                    </DropdownMenuItem>
                     <DropdownMenuItem
                       onClick={() => {
-                        if (user?.role === 'administrator') {
-                          window.open('https://api.oyonews.com.ng/wp-admin', '_blank');
+                        if (user?.role === "administrator") {
+                          window.open(
+                            "https://api.oyonews.com.ng/wp-admin",
+                            "_blank"
+                          );
                         } else {
-                          router.push('/dashboard');
+                          router.push("/dashboard");
                         }
                       }}
                     >
-                      {user?.role === 'administrator' ? 'Admin Panel' : 'Dashboard'}
+                      {user?.role === "administrator"
+                        ? "Admin Panel"
+                        : "Dashboard"}
                     </DropdownMenuItem>
                     <DropdownMenuItem
                       onClick={() => {
                         logout();
-                        router.push('/');
+                        router.push("/");
                       }}
                       className="text-red-600"
                     >
@@ -186,23 +221,25 @@ const Header = () => {
           <div
             className={`md:hidden transition-all duration-300 ease-in-out ${
               isMobileMenuOpen
-                ? 'max-h-64 opacity-100 border-t border-gray-700'
-                : 'max-h-0 opacity-0 overflow-hidden'
+                ? "max-h-64 opacity-100 border-t border-gray-700"
+                : "max-h-0 opacity-0 overflow-hidden"
             }`}
           >
             <nav className="py-4 space-y-1">
-              {['/', '/search', '/about', '/contact'].map((path) => (
+              {["/", "/search", "/about", "/contact"].map((path) => (
                 <Link
                   key={path}
                   href={path}
                   onClick={closeMobileMenu}
                   className="block px-4 py-3 text-white hover:text-red-400 hover:bg-gray-800 transition rounded mx-2"
                 >
-                  {path === '/' ? 'Home' : path.slice(1).charAt(0).toUpperCase() + path.slice(2)}
+                  {path === "/"
+                    ? "Home"
+                    : path.slice(1).charAt(0).toUpperCase() + path.slice(2)}
                 </Link>
               ))}
               {isAuthenticated &&
-                (user?.role === 'administrator' ? (
+                (user?.role === "administrator" ? (
                   <a
                     href="https://api.oyonews.com.ng/wp-admin"
                     target="_blank"
@@ -227,7 +264,7 @@ const Header = () => {
                     onClick={() => {
                       logout();
                       closeMobileMenu();
-                      router.push('/');
+                      router.push("/");
                     }}
                     variant="ghost"
                     size="sm"
