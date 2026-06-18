@@ -4,7 +4,6 @@ import AdBanner from "@/components/AdBanner";
 import ShareButtons from "@/components/ShareButtons";
 import ViewCounter from "@/components/ViewCounter";
 import CommentsSection from "@/components/CommentSection";
-import * as cheerio from "cheerio";
 import Link from "next/link";
 import { format } from "date-fns";
 
@@ -39,22 +38,6 @@ type Props = {
   relatedPosts: RelatedPost[];
 };
 
-const injectAdsIntoContent = (html: string): string[] => {
-  const $ = cheerio.load(html);
-  const elements = $("body").children().toArray();
-  const parts: string[] = [];
-
-  const interval = Math.floor(elements.length / 3) || 2;
-
-  elements.forEach((el, i) => {
-    parts.push($.html(el));
-    if (i > 0 && i % interval === 0) {
-      parts.push("__AD_PLACEHOLDER__");
-    }
-  });
-
-  return parts;
-};
 
 export default function PostContent({ post, relatedPosts }: Props) {
   const featuredImage =
@@ -69,7 +52,6 @@ export default function PostContent({ post, relatedPosts }: Props) {
 
 const date = format(new Date(post.date), "MMMM d, yyyy"); 
   const postUrl = `https://oyonews.com.ng/${post.slug}`;
-  const contentWithAds = injectAdsIntoContent(post.content.rendered);
 
   return (
     <article className="bg-white rounded-lg shadow-lg overflow-hidden">
@@ -120,17 +102,12 @@ const date = format(new Date(post.date), "MMMM d, yyyy");
 
         {/* Main Content with Ads */}
         <div className="space-y-6">
-          {contentWithAds.map((block, i) =>
-            block === "__AD_PLACEHOLDER__" ? (
-              <AdBanner key={`ad-${i}`} size="medium" position="mid-content" />
-            ) : (
+       
               <div
-                key={i}
                 className="prose prose-lg max-w-none text-gray-700 leading-relaxed"
-                dangerouslySetInnerHTML={{ __html: block }}
+                dangerouslySetInnerHTML={{ __html: post.content.rendered }}
               />
-            )
-          )}
+        
         </div>
 
         {/* Tags */}
